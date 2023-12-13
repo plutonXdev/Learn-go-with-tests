@@ -1,8 +1,12 @@
-package main
+package shapes
 
 type Rectangle struct {
 	Width  float64
 	Height float64
+}
+
+type Circle struct {
+	radius float64
 }
 
 func Perimeter(rectangle Rectangle) float64 {
