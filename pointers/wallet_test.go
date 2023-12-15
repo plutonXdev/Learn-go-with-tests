@@ -1,16 +1,34 @@
 package wallet
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
+
+func (b Bitcoin) String() string {
+	return fmt.Sprintf("%d BTC", b)
+}
 
 func TestWallet(t *testing.T) {
-	Wallet := Wallet{}
+	assertBalance := func(t testing.TB, wallet Wallet, want Bitcoin) {
+		t.Helper()
+		got := wallet.Balance()
 
-	Wallet.Deposit(10)
-
-	got := Wallet.Balance()
-	want := 10
-	if got != want {
-		t.Errorf("got %d want %d", got, want)
+		if got != want {
+			t.Errorf("got %s want %s", got, want)
+		}
 	}
+
+	t.Run("deposit", func(t *testing.T) {
+		wallet := Wallet{}
+		wallet.Deposit(Bitcoin(10))
+		assertBalance(t, wallet, Bitcoin(10))
+	})
+
+	t.Run("withdraw", func(t *testing.T) {
+		wallet := Wallet{balance: Bitcoin(20)}
+		wallet.Withdraw(Bitcoin(10))
+		assertBalance(t, wallet, Bitcoin(10))
+	})
 
 }
