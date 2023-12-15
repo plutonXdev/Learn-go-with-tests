@@ -2,12 +2,12 @@ package wallet
 
 import "testing"
 
-func Testwallet(t *testing.T) {
-	wallet := wallet{}
+func TestWallet(t *testing.T) {
+	Wallet := Wallet{}
 
-	wallet.deposit(10)
+	Wallet.Deposit(10)
 
-	got := wallet.balance()
+	got := Wallet.Balance()
 	want := 10
 	if got != want {
 		t.Errorf("got %d want %d", got, want)
