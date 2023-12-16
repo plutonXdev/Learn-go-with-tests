@@ -52,17 +52,16 @@ func assertError(t testing.TB, got, want error) {
 		t.Errorf("got error %q want %q", got, want)
 	}
 }
-
-func assertDefinition(t testing.TB, dictionary Dictionary, word, defination string) {
+func assertDefinition(t testing.TB, dictionary Dictionary, word, definition string) {
 	t.Helper()
 
-	got, err := dictionary.Search("secondtest")
+	got, err := dictionary.Search(word)
 	if err != nil {
 		t.Fatal("should find added word:", err)
 	}
-
-	assertStrings(t, got, defination)
+	assertStrings(t, got, definition)
 }
+
 func assertStrings(t testing.TB, got, want string) {
 	t.Helper()
 	if got != want {
